@@ -2,8 +2,9 @@
 
 import reflex as rx
 from .routes import routes
+from .styles.globals import styles
 
-app = rx.App()
+app = rx.App(style=styles)
 
 for route in routes:
     # print(f"Adding route: {route}")

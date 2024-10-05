@@ -1,7 +1,7 @@
 import reflex as rx
 
 config = rx.Config(
-    app_name="notion_system_clone",
+    app_name="notion",
     tailwind={
         "theme": {
             "extend": {},

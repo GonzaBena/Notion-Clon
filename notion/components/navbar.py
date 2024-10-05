@@ -1,4 +1,5 @@
 import reflex as rx
+from .clipboard import clipboard
 
 
 def navbar_link(text: str, url: str) -> rx.Component:
@@ -19,16 +20,15 @@ def navbar() -> rx.Component:
                         border_radius="25%",
                     ),
                     rx.heading(
-                        "Reflex", size="7", weight="bold"
+                        "Notion", size="7", weight="bold"
                     ),
                     align_items="center",
                 ),
                 rx.hstack(
-                    navbar_link("Home", "/#"),
-                    navbar_link("About", "/#"),
-                    navbar_link("Pricing", "/#"),
-                    navbar_link("Contact", "/#"),
+                    navbar_link("Home", "/"),
+                    navbar_link("Notes", "/notas"),
                     rx.color_mode.button(),
+                    clipboard("hola mundo"),
                     justify="end",
                     spacing="5",
                 ),
@@ -50,17 +50,22 @@ def navbar() -> rx.Component:
                     ),
                     align_items="center",
                 ),
-                rx.menu.root(
-                    rx.menu.trigger(
-                        rx.icon("menu", size=30)
+                rx.box(
+                    rx.menu.root(
+                        rx.menu.trigger(
+                            rx.icon("menu", size=30)
+                        ),
+                        rx.menu.content(
+                            rx.menu.item("Home"),
+                            rx.menu.item("About"),
+                            rx.menu.item("Pricing"),
+                            rx.menu.item("Contact"),
+                            size="2"
+                        ),
+                        justify="end",
                     ),
-                    rx.menu.content(
-                        rx.menu.item("Home"),
-                        rx.menu.item("About"),
-                        rx.menu.item("Pricing"),
-                        rx.menu.item("Contact"),
-                    ),
-                    justify="end",
+                    rx.color_mode.button(),
+                    class_name="flex gap-5"
                 ),
                 justify="between",
                 align_items="center",
