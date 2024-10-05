@@ -1,14 +1,15 @@
 import reflex as rx
 from ...states import State
+from ...components.navbar import navbar as Navbar
 
 
 @rx.page('/', title="Inicio")
 def index() -> rx.Component:
     # Welcome Page (Index)
     return rx.container(
-        rx.color_mode.button(position="top-right"),
+        Navbar(),
         rx.vstack(
-            rx.heading(State.title, size="9"),
+            rx.heading(State.title, class_name="text-4xl"),
             rx.link(
                 rx.button("Check out our docs!"),
                 href="https://reflex.dev/docs/getting-started/introduction/",
