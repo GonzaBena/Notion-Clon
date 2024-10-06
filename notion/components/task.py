@@ -1,7 +1,7 @@
 import reflex as rx
 from notion.models.tasks import Tasks
-from notion.states import State
 from notion.constant import COLOR_SCHEME
+from notion.states.notes import Notes
 
 
 def task(task: Tasks):
@@ -9,11 +9,10 @@ def task(task: Tasks):
         rx.checkbox(
             default_checked=task.status,
             spacing="2",
-            on_change=lambda a: State.change_status(task),
             class_name="text-4xl cursor-pointer",
             variant="soft",
             color_scheme=COLOR_SCHEME,
-            size="5"
+            size="3"
         ),
         rx.heading(task.title, class_name="select-none"),
 
@@ -22,5 +21,5 @@ def task(task: Tasks):
             hover:bg-opacity-20 transition-all duration-300
             cursor-pointer
         """,
-        on_click=lambda: State.change_status(task),
+        on_click=lambda: Notes.change_status(task),
     )

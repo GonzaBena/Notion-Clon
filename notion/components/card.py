@@ -11,8 +11,6 @@ def card(*args, **kwargs):
 
     # The remaining data will now be in 'data'
     remaining_data = kwargs
-    for i in extracted_data:
-        print(i)
 
     return rx.card(
         args,

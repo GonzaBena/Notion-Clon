@@ -4,6 +4,7 @@ from notion.components.note_insertion import note_insert as Note_insert
 from notion.states import State
 from notion.components.task import task as Task
 from notion.components.card import card as Card
+from notion.states.notes import Notes
 
 
 @rx.page('/', title="Inicio")
@@ -15,7 +16,7 @@ def index() -> rx.Component:
             Card(
                 rx.heading("Por Hacer"),
                 rx.foreach(
-                    State.ready_tasks,
+                    Notes.ready_tasks,
                     Task,
                 ),
                 class_name="items-start flex-wrap",
@@ -23,7 +24,7 @@ def index() -> rx.Component:
             Card(
                 rx.heading("Hechas"),
                 rx.foreach(
-                    State.todo_tasks,
+                    Notes.todo_tasks,
                     Task,
                 ),
                 class_name="items-start flex-wrap",
