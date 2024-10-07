@@ -13,21 +13,27 @@ def index() -> rx.Component:
         Navbar(),
         rx.flex(
             Note_insert(),
-            Card(
-                rx.heading("Por Hacer"),
-                rx.foreach(
-                    Notes.ready_tasks,
-                    Task,
+            rx.grid(
+                Card(
+                    rx.heading("Por Hacer"),
+                    rx.foreach(
+                        Notes.ready_tasks,
+                        Task,
+                    ),
+                    class_name="items-start flex-wrap",
                 ),
-                class_name="items-start flex-wrap",
-            ),
-            Card(
-                rx.heading("Hechas"),
-                rx.foreach(
-                    Notes.todo_tasks,
-                    Task,
+                Card(
+                    rx.heading("Hechas"),
+                    rx.foreach(
+                        Notes.todo_tasks,
+                        Task,
+                    ),
+                    class_name="items-start flex-wrap",
                 ),
-                class_name="items-start flex-wrap",
+
+                columns="2",
+                spacing="5",
+                width="100%",
             ),
 
             class_name="flex flex-grow flex-col h-full w-full gap-5",

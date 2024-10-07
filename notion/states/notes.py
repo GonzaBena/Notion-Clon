@@ -2,15 +2,16 @@ import reflex as rx
 from typing import Any, List
 
 from notion.models.tasks import Tasks
+from notion.constant import Icons
 from . import State
 
 
 class Notes(State):
     notes: List[Tasks] = [
-        Tasks(title="primer test 1", description="", status=True),
-        Tasks(title="primer test 2", description="", status=True),
-        Tasks(title="primer test 3", description="", status=True),
-        Tasks(title="primer test 4", description="", status=True),
+        Tasks(icon=Icons.DICE_1, title="primer test 1", description="Hola mundo", status=True),
+        Tasks(icon=Icons.EARTH, title="primer test 2", description="", status=True),
+        Tasks(icon=Icons.DICE_1, title="primer test 3", description="", status=True),
+        Tasks(icon=Icons.DICE_1, title="primer test 4", description="", status=True),
     ]
     notes_filtered: List[Tasks] = notes
     condition: str = ""
@@ -59,5 +60,6 @@ class Notes(State):
             status=not status
         )
 
-        index = self.notes_filtered.index(task_saved)
-        self.notes_filtered[index] = new_task
+        index = self.notes.index(task_saved)
+        self.notes[index] = new_task
+        self.filter_notes()

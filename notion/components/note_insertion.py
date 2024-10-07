@@ -1,13 +1,13 @@
 import reflex as rx
 from notion.states import State
 from notion.states.notes import Notes
-from notion.constant import COLOR_SCHEME
+from notion.constant import ColorScheme
+from .insert_note import insert_note as Insert_note
 from .card import card as Card
 
 
 class NoteState(State):
     text: str = ""
-    color_scheme: str = COLOR_SCHEME
 
     def clear_text(self):
         self.text = ""
@@ -18,19 +18,19 @@ def note_insert():
         rx.hstack(
             rx.input(
                 placeholder="Search here...", max_length=20,
-                value=NoteState.text,
+                value=Notes.condition,
                 on_change=lambda value: Notes.set_condition(value),
                 variant="soft",
-                color_scheme=NoteState.color_scheme,
+                color_scheme=ColorScheme.INPUTS.value, 
                 size="3",
                 width="100%",
             ),
-            rx.heading(NoteState.text),
             rx.button(
                 "Erase", 
-                on_click=NoteState.clear_text,
-                color_scheme=NoteState.color_scheme,
+                on_click=lambda: Notes.set_condition(""),
+                color_scheme=ColorScheme.DELETE.value,
             ),
+            Insert_note(),
 
             class_name="justify-center items-center w-[80%]"
         ),
