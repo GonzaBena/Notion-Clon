@@ -1,20 +1,21 @@
 import reflex as rx
-from notion.constant import ColorScheme
+from notion.constant import ColorScheme, Icons
 from notion.states import State
 from .dynamic_icon import dynamic_icon as Dynamic_icon
 
-class DialogState(State):
+class DialogState(rx.State):
     opened: bool = False
 
     def count_opens(self, e):
         self.opened = not self.opened
 
 def dialog(*args, **kwargs):
-    title = kwargs.get("title")
-    description = kwargs.get("description")
-    button_content = kwargs.get("button_content")
-    on_click = kwargs.get("on_click")
-    to_clear = kwargs.get("to_clear")
+    title = kwargs.pop("title", "Dialog")
+    description = kwargs.pop("description", "")
+    button_content = kwargs.pop("button_content", None)
+    on_click = kwargs.pop("on_click", None)
+    to_clear = kwargs.pop("to_clear", None)
+    icon = kwargs.pop("icon", Icons.EARTH.value)
 
     if button_content is None:
         button_content = rx.icon(tag="plus", color_scheme=ColorScheme.ADD.value)
@@ -27,10 +28,7 @@ def dialog(*args, **kwargs):
 
             rx.dialog.content(
                 rx.box(
-                    rx.cond(kwargs.get("icon"),
-                        Dynamic_icon(kwargs.get("icon")),
-                        None
-                    ),
+                    Dynamic_icon(icon),
                     rx.dialog.title(title, class_name="capitalize m-0"),
 
                     class_name="flex items-center gap-3 mb-5",
@@ -38,7 +36,10 @@ def dialog(*args, **kwargs):
                 rx.dialog.description(
                     description,
                 ),
-                args,
+                rx.box(
+                    args,
+                    **kwargs,
+                ),
                 rx.box(
                     rx.dialog.close(
                         rx.button(rx.icon(tag="x"), size="3", color_scheme="red", class_name="w-10 h-10 p-2 rounded-xl mt-5", on_click=to_clear),

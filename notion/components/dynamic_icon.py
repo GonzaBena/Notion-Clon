@@ -1,7 +1,7 @@
 import reflex as rx
 
 
-def dynamic_icon(icon_name, **kwargs):
+def dynamic_icon(icon_name: str, **kwargs):
     return rx.match(
         icon_name,
         ('a_arrow_down', rx.icon('a_arrow_down', **kwargs)),

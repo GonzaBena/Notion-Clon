@@ -6,7 +6,7 @@ from .insert_note import insert_note as Insert_note
 from .card import card as Card
 
 
-class NoteState(State):
+class NoteState(rx.State):
     text: str = ""
 
     def clear_text(self):
